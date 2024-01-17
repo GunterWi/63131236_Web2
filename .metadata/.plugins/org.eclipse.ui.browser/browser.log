@@ -1,0 +1,7 @@
+
+Jan 16, 2024 15:06:01.25 NEW SESSION
+Jan 16, 2024 15:06:01.26 [8676:24740:0116/150601.254:ERROR:policy_logger.cc(156)] :components\enterprise\browser\controller\chrome_browser_cloud_management_controller.cc(161) Cloud management controller initialization aborted as CBCM is not enabled. Please use the `--enable-chrome-browser-cloud-management` command line flag to enable it if you are not using the official Google Chrome build.
+Jan 16, 2024 15:06:05.55 [8676:26008:0116/150605.558:ERROR:get_updates_processor.cc(315)] PostClientToServerMessage() failed during GetUpdates with error 103
+
+Jan 17, 2024 01:50:30.47 NEW SESSION
+Jan 17, 2024 01:50:30.47 [4428:14820:0117/015030.472:ERROR:policy_logger.cc(156)] :components\enterprise\browser\controller\chrome_browser_cloud_management_controller.cc(161) Cloud management controller initialization aborted as CBCM is not enabled. Please use the `--enable-chrome-browser-cloud-management` command line flag to enable it if you are not using the official Google Chrome build.
