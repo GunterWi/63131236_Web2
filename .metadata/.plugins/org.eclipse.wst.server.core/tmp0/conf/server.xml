@@ -134,7 +134,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="C:\BaiTap\63131236_Web2\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="C:\BaiTap\63131236_Web2\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\HelloWorld" path="/HelloWorld" reloadable="true" source="org.eclipse.jst.jee.server:HelloWorld"/></Host>
+      <Context docBase="C:\BaiTap\63131236_Web2\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="C:\BaiTap\63131236_Web2\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\HelloWorld" path="/HelloWorld" reloadable="true" source="org.eclipse.jst.jee.server:HelloWorld"/><Context docBase="C:\BaiTap\63131236_Web2\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\DoGetAndDoPost" path="/DoGetAndDoPost" reloadable="true" source="org.eclipse.jst.jee.server:DoGetAndDoPost"/><Context docBase="C:\BaiTap\63131236_Web2\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\AboutMe" path="/AboutMe" reloadable="true" source="org.eclipse.jst.jee.server:AboutMe"/></Host>
     </Engine>
   </Service>
 </Server>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd" version="5.0">
+  <servlet>
+    <description></description>
+    <display-name>subpage</display-name>
+    <servlet-name>subpage</servlet-name>
+    <servlet-class>subpage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>subpage</servlet-name>
+    <url-pattern>/subpage</url-pattern>
+  </servlet-mapping>
+  <display-name>DoGetAndDoPost</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>testdoPost</display-name>
+    <servlet-name>testdoPost</servlet-name>
+    <servlet-class>testdoPost</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>testdoPost</servlet-name>
+    <url-pattern>/testdoPost</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AboutMe</display-name>
+    <servlet-name>AboutMe</servlet-name>
+    <servlet-class>AboutMe</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AboutMe</servlet-name>
+    <url-pattern>/AboutMe</url-pattern>
+  </servlet-mapping>
+</web-app>

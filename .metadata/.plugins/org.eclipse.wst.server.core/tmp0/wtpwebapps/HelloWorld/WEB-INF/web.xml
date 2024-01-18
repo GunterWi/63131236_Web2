@@ -9,4 +9,24 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>First</display-name>
+    <servlet-name>First</servlet-name>
+    <servlet-class>First</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>First</servlet-name>
+    <url-pattern>/First</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>subpage</display-name>
+    <servlet-name>subpage</servlet-name>
+    <servlet-class>subpage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>subpage</servlet-name>
+    <url-pattern>/subpage</url-pattern>
+  </servlet-mapping>
 </web-app>
