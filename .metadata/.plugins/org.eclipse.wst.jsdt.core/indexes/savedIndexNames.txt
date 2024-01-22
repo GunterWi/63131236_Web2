@@ -1,8 +1,0 @@
-INDEX VERSION 1.4+C:\BaiTap\63131236_Web2\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-3548790349.index
-2908752459.index
-849259653.index
-157359949.index
-3503620389.index
-670101203.index
-2380175872.index
