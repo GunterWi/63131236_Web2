@@ -8,6 +8,6 @@
 - Apache Tomcat Server 
 
 ***Quá trình thực hiện bài tập***
-### Bài 1: ...
-#### [Chi tiết bài tập](Null)
-![image](Null)
+### Bài 1: Các ví dụ 1.1, 1.2, 1.3, 1.4
+#### [Chi tiết bài tập](https://github.com/GunterWi/63131236_Web2/tree/main/DoGetAndDoPost)
+![image](https://media.discordapp.net/attachments/1013818251580551170/1198873979595784232/image.png)
