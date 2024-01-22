@@ -39,4 +39,14 @@
     <servlet-name>AboutMe</servlet-name>
     <url-pattern>/AboutMe</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>BMI</display-name>
+    <servlet-name>BMI</servlet-name>
+    <servlet-class>BMI</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BMI</servlet-name>
+    <url-pattern>/BMI</url-pattern>
+  </servlet-mapping>
 </web-app>
