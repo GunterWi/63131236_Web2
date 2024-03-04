@@ -1,4 +1,4 @@
-![image](https://github.com/GunterWi/63131236_Web2/assets/132816424/0165b330-e374-4ca4-b218-16cfd34ec7e0)# Bài Tập Web 2 - Phát triển ứng dụng Web 2
+# Bài Tập Web 2 - Phát triển ứng dụng Web 2
 
 > Sinh viên: Nguyễn Quốc Thái - 63.CNTT.CLC-1
 
