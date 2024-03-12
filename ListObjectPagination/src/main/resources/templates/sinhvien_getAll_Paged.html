@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Danh sách sinh viên</title>
+</head>
+<body>
+	<h1>Danh sách sinh viên</h1>
+	<table border="1">
+        <thead>
+            <tr>
+                <th> Mã số sinh viên </th>
+                <th> Họ và tên </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="sv: ${dsSV}">
+                <td th:text="${sv.maSoSV}" />
+				<td th:text="${sv.hoVaTen}" />
+            </tr>
+        </tbody>
+    </table>
+    <div th:if="${dsSV.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
+        <a th:href="@{/danhsachSV(size=${dsSV.size}, page=${pageNumber})}"
+            th:text=${pageNumber}
+            th:class="${pageNumber==dsSV.number + 1} ? active"></a>
+    </div>
+	
+	
+</body>
+</html>

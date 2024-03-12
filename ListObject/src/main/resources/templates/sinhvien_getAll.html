@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Danh sách sinh viên</title>
+</head>
+<body>
+	<h1>Student List</h1>
+	<table border="1">
+		<thead>
+			<tr>
+				<th>Mã số sinh viên </th>
+				<th>Họ và Tên </th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="sv : ${dsSV}">
+				<td th:text="${sv.maSoSV}" />
+				<td th:text="${sv.hoVaTen}" />
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>
