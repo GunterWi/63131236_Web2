@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Thêm Sản Phẩm Mới</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container mt-4">
+      <h2>Thêm Sản Phẩm Mới</h2>
+      <form
+        th:action="@{/products/add}"
+        th:object="${product}"
+        method="post"
+        class="form-group"
+      >
+        Mã:<input type="text" th:field="*{code}" class="form-control mb-2" />
+        Tên:<input type="text" th:field="*{name}" class="form-control mb-2" />
+        Giá:<input
+          type="number"
+          th:field="*{price}"
+          class="form-control mb-2"
+        />
+        Mô tả:<input
+          type="text"
+          th:field="*{description}"
+          class="form-control mb-2"
+        />
+        <input type="submit" value="Thêm" class="btn btn-primary" />
+      </form>
+      <a th:href="@{/products}" class="btn btn-outline-secondary mt-3"
+        >Quay lại danh sách sản phẩm</a
+      >
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

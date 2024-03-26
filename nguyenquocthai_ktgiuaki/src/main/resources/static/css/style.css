@@ -1,0 +1,37 @@
+body {
+  font-family: Arial, sans-serif;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+th,
+td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: left;
+}
+th {
+  background-color: #f2f2f2;
+}
+.pagination {
+  text-align: center;
+  margin-top: 20px;
+}
+.pagination a {
+  margin: 0 5px;
+  text-decoration: none;
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  color: #333;
+}
+.pagination a.active {
+  font-weight: bold;
+  border: 1px solid #333;
+  color: white;
+  background-color: #333;
+}
+.pagination a:hover {
+  border-color: #333;
+}
