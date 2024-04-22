@@ -1,13 +1,13 @@
-package com.nqt.restaurant_cuoiky;
+package com.ngt.cuoiky;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class RestaurantCuoikyApplication {
+public class CuoikyApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RestaurantCuoikyApplication.class, args);
+		SpringApplication.run(CuoikyApplication.class, args);
 	}
 
 }
