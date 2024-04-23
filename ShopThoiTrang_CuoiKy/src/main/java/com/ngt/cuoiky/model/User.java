@@ -42,9 +42,6 @@ public class User {
     @Column(name="is_active", nullable = false)
     private Boolean isActive;
 
-    @Column(name = "verification_code", length = 64)
-    private String verificationCode;
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
