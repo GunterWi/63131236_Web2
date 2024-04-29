@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="fragments :: page_head('Home - Shopwise Website', 'none')" />
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/navbar.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/footer.css}"/>
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/swiper@7/swiper-bundle.min.css"
+    />
+</head>
+<body>
+    <div th:replace="fragments/navbar_fragment :: navbar"></div>
+    <div class="main-content">
+        <div class="gallery d-flex align-items-start justify-content-center">
+            <div class="swiper swiper-gallery">
+                <div class="swiper-wrapper">
+                    <th:block th:if="${listPostersLeft}" th:each="poster : ${listPostersLeft}">
+                        <div class="swiper-slide">
+                            <div class="gallery-item position-relative">
+                                <img th:src="${poster.image}" />
+                                <div class="gallery-item-content">
+                                    <p class="gallery-item-title" style="text-transform: capitalize" th:text="${poster.title}"></p>
+                                    <div class="gallery-item-wrapper d-flex">
+                                        <div class="gallery-item-divine"></div>
+                                        <p class="gallery-item-subtitle" style="text-transform: uppercase" th:text="${poster.subTitle}"></p>
+                                    </div>
+                                    <p class="gallery-item-description" th:text="${poster.description}"></p>
+                                    <button class="gallery-item-btn">Explore</button>
+                                </div>
+                            </div>
+                        </div>
+                    </th:block>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+            <div class="sub-gallery d-flex flex-column">
+                <th:block th:if="${listPostersRight}" th:each="poster : ${listPostersRight}">
+                    <div>
+                        <img th:src="${poster.image}"/>
+                    </div>
+                </th:block>
+            </div>
+
+        </div>
+        <div class="section-policy">
+            <div class="section-policy-item text-center">
+                <img th:src="@{/images/car.png}"/>
+                <div class="section-policy-title">GIAO HÀNG TOÀN QUỐC</div>
+                <div class="section-policy-description">Vận chuyển khắp Việt Nam</div>
+            </div>
+            <div class="section-policy-item text-center">
+                <img th:src="@{/images/money.png}"/>
+                <div class="section-policy-title">THANH TOÁN KHI NHẬN HÀNG</div>
+                <div class="section-policy-description">Nhận hàng tại nhà rồi thanh toán</div>
+            </div>
+            <div class="section-policy-item text-center">
+                <img th:src="@{/images/tool.png}"/>
+                <div class="section-policy-title">BẢO HÀNH DÀI HẠN</div>
+                <div class="section-policy-description">Bảo hành lên đến 60 ngày</div>
+            </div>
+            <div class="section-policy-item text-center">
+                <img th:src="@{/images/refund.png}"/>
+                <div class="section-policy-title">ĐỔI HÀNG DỄ DÀNG</div>
+                <div class="section-policy-description">Đổi hàng thoải mái trong 30 ngày</div>
+            </div>
+        </div>
+        <section class="list-brand">
+            <div class="list-product-wrapper">
+                <div class="list-product-title d-flex flex-column justify-content-center position-relative">
+                    <h3>Danh mục sản phẩm</h3>
+                </div>
+                <div class="list-brand-carousel">
+                    <div class="swiper-brand swiper">
+                        <!-- Additional required wrapper -->
+                        <div class="swiper-wrapper swiper-wrapper-brand">
+                            <!-- Slides -->
+                            <th:block  th:each="cate : ${listCategories}">
+                                <div class="swiper-slide category-slide">
+                                    <a th:href="${'/search/page/1?keywordSearch=&radio-category=' + cate.id +  '&radio-brand=all&radio-price=all'}"
+                                       class="d-flex align-items-center justify-content-center">
+                                        <img th:src="${cate.image}"/>
+                                        <div class="category-text" style="text-transform: capitalize" th:text="${cate.name}"></div>
+                                    </a>
+                                </div>
+                            </th:block>
+                        </div>
+                        <!-- If we need navigation buttons -->
+                        <div class="swiper-button-prev btn-prev-brand"></div>
+                        <div class="swiper-button-next btn-next-brand"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="list-brand">
+            <div class="list-product-wrapper">
+                <div class="list-product-title d-flex flex-column justify-content-center position-relative">
+                    <h3>Thương hiệu nổi bật</h3>
+                </div>
+                <div class="list-brand-carousel">
+                    <div class="swiper-brand swiper">
+                        <!-- Additional required wrapper -->
+                        <div class="swiper-wrapper swiper-wrapper-brand">
+                            <!-- Slides -->
+                            <th:block  th:each="brand : ${listBrands}">
+                                <div class="swiper-slide brand-slide">
+                                    <a th:href="${'/search/page/1?keywordSearch=&radio-category=all&radio-brand=' + brand.id + '&radio-price=all'}"
+                                       class="d-flex justify-content-center align-items-center">
+                                        <img th:src="${brand.logo}"/>
+                                    </a>
+                                </div>
+                            </th:block>
+                        </div>
+                        <!-- If we need navigation buttons -->
+                        <div class="swiper-button-prev btn-prev-brand"></div>
+                        <div class="swiper-button-next btn-next-brand"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div th:replace="fragments/listProducts_fragment::listProduct('SẢN PHẨM MỚI NHẤT', ${listLatestProducts})"></div>
+        <div th:replace="fragments/listProducts_fragment::listProduct('BÁN CHẠY NHẤT', ${listBestSellProducts})"></div>
+
+    </div>
+    <div th:replace="fragments/footer_fragment :: footer"></div>
+
+<script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}" ></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/index.js}" ></script>
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.4/dist/sweetalert2.all.min.js"></script>
+<script th:inline="javascript">
+    $(document).ready(function() {
+        let messageError = [[${messageError}]];
+        let messageSuccess = [[${messageSuccess}]];
+
+        if(messageSuccess) {
+            Swal.fire({
+                title: '',
+                text: messageSuccess,
+                icon: 'success',
+                confirmButtonColor: '#3085d6'
+            })
+        }
+        if(messageError ) {
+            Swal.fire({
+                title: '',
+                text: messageError,
+                icon: 'error',
+            })
+        }
+
+
+    })
+</script>
+<script>
+    const swiper1 = new Swiper('.swiper-gallery', {
+        loop: true,
+        speed: 1200,
+        slidesPerView: 1,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true
+        },
+        autoplay: {
+            delay: 5000,
+            disableOnInteraction: false,
+        }
+
+    });
+    const swiper2 = new Swiper('.swiper-brand', {
+        slidesPerGroup:8,
+        slidesPerView:8,
+        spaceBetween:30,
+        allowTouchMove:false,
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    });
+
+    function detectClick(){
+        return false; // add this line
+    }
+</script>
+</body>
+
+</html>
