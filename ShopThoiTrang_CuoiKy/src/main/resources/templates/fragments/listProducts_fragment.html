@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<section th:fragment="listProduct(title, listProduct)" class="list-product">
+    <div class="list-product-wrapper">
+        <div class="list-product-title d-flex flex-column justify-content-center position-relative">
+            <h3 th:text="${title}"></h3>
+        </div>
+        <div class="list-product-carousel">
+            <th:block th:each="product: ${listProduct}">
+                <div class="list-product-item">
+                    <div class="list-product-card">
+                        <a th:href="@{'/product/detail/' + ${product.id}}">
+                            <div class="card-wrapper position-relative">
+                                <div class="card-container position-relative">
+                                    <img class="card-container-img" th:src="${product.image}">
+                                </div>
+                            </div>
+                            <div class="card-content d-flex flex-column">
+                                <a th:href="@{'/product/detail/' + ${product.id}}">
+                                    <div class="card-name" th:text="${product.name}"></div>
+                                </a>
+                                <p class="card-description" th:text="${product.shortDescription}"></p>
+                                <div class="card-price d-flex align-items-center justify-content-center">
+                                    <th:block th:if="${product.discount > 0}">
+                                        <div class="d-flex align-items-center justify-content-center" style="font-size: 16px; text-decoration: line-through; margin-right: 5px; color: #9da0ad;">
+                                            <div th:replace="fragments :: format_currency(${product.price})"></div>
+                                            <span>₫</span>
+                                        </div>
+                                    </th:block>
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <div th:replace="fragments :: format_currency(${product.getDiscountPrice()})"></div>
+                                        <span>₫</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </th:block>
+        </div>
+    </div>
+</section>

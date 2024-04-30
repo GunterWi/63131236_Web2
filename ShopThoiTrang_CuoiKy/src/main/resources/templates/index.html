@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-<head th:replace="fragments :: page_head('Home - Shopwise Website', 'none')" />
-<head>
+    <head th:replace="~{fragments :: page_head('Home - Shopwise Website', 'none')}" />
+    <head>
     <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/navbar.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/footer.css}"/>
     <link
         rel="stylesheet"
-        href="https://unpkg.com/swiper@7/swiper-bundle.min.css"
+        href="https://unpkg.com/swiper@11/swiper-bundle.min.css"
     />
 </head>
 <body>
-    <div th:replace="fragments/navbar_fragment :: navbar"></div>
+    <div th:replace="~{fragments/navbar_fragment :: navbar}"></div>
     <div class="main-content">
         <div class="gallery d-flex align-items-start justify-content-center">
             <div class="swiper swiper-gallery">
@@ -120,16 +120,16 @@
                 </div>
             </div>
         </section>
-        <div th:replace="fragments/listProducts_fragment::listProduct('SẢN PHẨM MỚI NHẤT', ${listLatestProducts})"></div>
-        <div th:replace="fragments/listProducts_fragment::listProduct('BÁN CHẠY NHẤT', ${listBestSellProducts})"></div>
+        <div th:replace="~{fragments/listProducts_fragment::listProduct('SẢN PHẨM MỚI NHẤT', ${listLatestProducts})}"></div>
+        <div th:replace="~{fragments/listProducts_fragment::listProduct('BÁN CHẠY NHẤT', ${listBestSellProducts})}"></div>
 
     </div>
-    <div th:replace="fragments/footer_fragment :: footer"></div>
+    <div th:replace="~{fragments/footer_fragment :: footer}"></div>
 
 <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}" ></script>
 <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/index.js}" ></script>
-<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+<script src="https://unpkg.com/swiper@11/swiper-bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.4/dist/sweetalert2.all.min.js"></script>
 <script th:inline="javascript">
     $(document).ready(function() {

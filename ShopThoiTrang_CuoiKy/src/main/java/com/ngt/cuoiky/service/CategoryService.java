@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.ngt.cuoiky.exceptions.CategoryNotFoundException;
 import com.ngt.cuoiky.model.Category;
 import com.ngt.cuoiky.repository.CategoryRepository;
 
+@Service
 public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;

@@ -12,12 +12,6 @@ public class Ward {
     @Column(name="name", nullable = false, length = 255)
     private String name;
 
-    @Column(name="name_en", length = 255)
-    private String nameEn;
-
-    @Column(name="full_name_en", length = 255)
-    private String fullNameEn;
-
     @Column(name="full_name", length = 255)
     private String fullName;
 
@@ -44,21 +38,6 @@ public class Ward {
         this.name = name;
     }
 
-    public String getNameEn() {
-        return nameEn;
-    }
-
-    public void setNameEn(String nameEn) {
-        this.nameEn = nameEn;
-    }
-
-    public String getFullNameEn() {
-        return fullNameEn;
-    }
-
-    public void setFullNameEn(String fullNameEn) {
-        this.fullNameEn = fullNameEn;
-    }
 
     public String getFullName() {
         return fullName;

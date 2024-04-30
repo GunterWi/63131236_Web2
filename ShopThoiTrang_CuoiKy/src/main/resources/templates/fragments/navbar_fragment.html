@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      >
+<nav th:fragment="navbar"  class="navbar">
+    <div class="navbar-left d-flex align-items-center flex-grow-1 justify-content-start">
+        <a href="/" style="outline: none !important;box-shadow: none !important;">
+            <img th:src="@{/images/logo-white.png}" alt="logo" class="navbar-logo"/>
+        </a>
+        <div class="navbar-search">
+            <form th:action="@{'/search/page/1'}" id="form-search">
+                <div class="input-group">
+               <span class="input-group-text navbar-search-text">
+                    <i class="fas fa-search"></i>
+                </span>
+                    <input type="text" autocomplete="off" class="form-control navbar-search-input" th:value="${keywordSearch != null ? keywordSearch : '' }" name="keywordSearch" placeholder="Nhập tên sản phẩm, danh mục hoặc thương hiệu...">
+                </div>
+            </form>
+        </div>
+
+
+    </div>
+
+    <div class="navbar-right d-flex align-items-center justify-content-end">
+        <th:block sec:authorize="isAnonymous()" >
+            <div class="navbar-auth d-flex align-items-center" >
+                <a href="/login">
+                    <span>Đăng nhập</span>
+                </a>
+                <div class="navbar-divine"></div>
+                <a href="/signup">
+                    <span>Đăng ký</span>
+                </a>
+            </div>
+        </th:block>
+        <div class="navbar-tool d-flex align-items-center ">
+            <div class="dropdown">
+                <a href="#" class="dropdown-toggle d-flex align-items-center justify-content-center position-relative" role="button" id="dropdownCart" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-shopping-basket"></i>
+                    <th:block th:if="${listCarts != null and !listCarts.empty}">
+                        <div class="nav-badge" th:text="${#lists.size(listCarts)}"></div>
+                        <div class="pulse-ring"></div>
+                    </th:block>
+
+
+                </a>
+                <div class="dropdown-menu dropdown-cart-menu" aria-labelledby="dropdownCart">
+                    <div class="d-flex flex-column">
+                        <th:block sec:authorize="isAuthenticated()">
+
+                            <div class="cart-body d-flex flex-column">
+                                <th:block th:if="${listCarts != null and !listCarts.empty}" th:each="cart : ${listCarts}">
+                                    <div th:class="'cart-item-count d-flex position-relative cart-item cartitem' + ${cart.products.id}">
+                                        <div class="cart-img">
+                                            <img th:src="${cart.products.image}"/>
+                                        </div>
+                                        <div class="cart-item-main">
+                                            <div class="cart-item-name" th:text="${cart.products.name}"></div>
+                                            <div class="cart-item-price d-flex align-items-center">
+                                                <div th:replace="fragments :: format_currency(${cart.products.getDiscountPrice()})"></div>
+                                                <span th:class="'price-quantity'+${cart.products.id}" th:text="'đ x ' + ${cart.quantity}"></span>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="btn-qlt d-flex">
+                                                    <a th:href="'/cart/update/' + ${cart.products.id} + '/' + ${cart.quantity - 1}" > - </a>
+                                                    <input type="number" min="1"  th:value="${cart.quantity}" th:class="'quantity' + ${cart.products.id}"  th:max="${cart.products.inStock}" readonly/>
+                                                    <a class="plus" th:href="'/cart/update/' + ${cart.products.id} + '/' + ${cart.quantity + 1}"> + </a>
+                                                </div>
+
+                                                <div class="cart-item-sum d-flex align-items-center" >
+                                                    <div th:class="'subtotal' + ${cart.products.id}">[[${#numbers.formatDecimal(cart.subtotal, 0, 'COMMA', 0, 'POINT')}]]</div>
+                                                    <span>đ</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="cart-delete-btn d-flex align-items-center justify-content-center" th:onclick="'btnDeleteCartItem(event,' + ${cart.products.id} + ')'"><i class="far fa-trash-alt"></i></div>
+                                    </div>
+                                </th:block>
+                                <div th:class="'flex-column align-items-center ' + ${listCarts == null or listCarts.empty ? 'd-flex' : 'd-none'}" id="sectionEmptyCartMessage" style="padding: 45px 0;">
+                                    <div class="d-flex align-items-center justify-content-center" style="width: 6.75rem; height: 6.125rem;">
+                                        <img th:src="@{/images/empty-cart.png}" style="width: 100%; height: 100%"/>
+                                    </div>
+                                    <div class="text-center mt-4">Chưa Có Sản Phẩm</div>
+                                </div>
+                            </div>
+                            <div class="cart-divine"></div>
+                            <div class="cart-footer d-flex flex-column align-items-stretch">
+                                <th:block th:if="${estimatedTotal != null}">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="cart-sum-text">
+                                            <strong>Tổng cộng:</strong>
+                                        </div>
+                                        <div class="cart-sum-number d-flex align-items-center font-weight-bold">
+                                            <div class="cart-estimatedTotal">[[${#numbers.formatDecimal(estimatedTotal, 0, 'COMMA', 0, 'POINT')}]]</div>
+                                            <span>đ</span>
+                                        </div>
+                                    </div>
+                                </th:block>
+                                <div class="cart-btn d-flex align-items-center justify-content-center">
+                                    <a href="/checkout">
+                                        <span>Xem giỏ hàng</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </th:block>
+                        <th:block sec:authorize="isAnonymous()">
+                            <div class="d-flex flex-column align-items-center" style="padding: 45px 0;">
+                                <div class="d-flex align-items-center justify-content-center" style="width: 6.75rem; height: 6.125rem;">
+                                    <img th:src="@{/images/empty-cart.png}" style="width: 100%; height: 100%"/>
+                                </div>
+                                <div class="text-center mt-4">You must login to view this cart</div>
+                            </div>
+                        </th:block>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <th:block sec:authorize="isAuthenticated()" >
+            <div class="navbar-user d-flex align-items-center">
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle d-flex align-items-center justify-content-center" role="button" id="dropdownUser" data-toggle="dropdown" aria-expanded="false">
+                        <span th:text="test" style="text-transform: capitalize"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-user-menu" aria-labelledby="dropdownUser">
+                        <div class="user-menu-wrapper d-flex flex-column">
+                            <a href="/profile/info" class="user-menu-item d-flex align-items-center"><i class="far fa-user"></i><span>Thông tin tài khoản</span></a>
+                            <a href="/profile/order/info" class="user-menu-item d-flex align-items-center"><i class="far fa-clipboard"></i><span>Danh sách đơn hàng</span></a>
+                            <a href="/profile/address" class="user-menu-item d-flex align-items-center"><i class="fas fa-map-marked-alt"></i><span>Địa chỉ của tôi</span></a>
+                            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                                <a href="/admin" class="user-menu-item d-flex align-items-center"><i class="fas fa-user-cog"></i><span>Quản lý trang web</span></a>
+                            </th:block>
+                            <a href="/logout" class="user-menu-item d-flex align-items-center"><i class="fas fa-sign-out-alt"></i><span>Đăng xuất</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </th:block>
+
+    </div>
+</nav>
