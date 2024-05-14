@@ -67,8 +67,10 @@
                                                 </div>
 
                                                 <div class="cart-item-sum d-flex align-items-center" >
-                                                    <div th:class="'subtotal' + ${cart.products.id}">[[${#numbers.formatDecimal(cart.subtotal, 0, 'COMMA', 0, 'POINT')}]]</div>
-                                                    <span>đ</span>
+                                                    <div th:with="formattedSubtotal=${#numbers.formatDecimal(cart.subtotal, 0, 'COMMA', 0, 'POINT')}"
+                                                    th:class="'subtotal' + ${cart.products.id}">
+                                                    <span th:text="${formattedSubtotal}"></span> đ
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -90,8 +92,10 @@
                                             <strong>Tổng cộng:</strong>
                                         </div>
                                         <div class="cart-sum-number d-flex align-items-center font-weight-bold">
-                                            <div class="cart-estimatedTotal">[[${#numbers.formatDecimal(estimatedTotal, 0, 'COMMA', 0, 'POINT')}]]</div>
-                                            <span>đ</span>
+                                            <div th:with="formattedTotal=${#numbers.formatDecimal(estimatedTotal, 0, 'COMMA', 0, 'POINT')}">
+                                                <div class="cart-estimatedTotal" th:text="${formattedTotal}"></div>
+                                                <span>đ</span>
+                                            </div>                                            
                                         </div>
                                     </div>
                                 </th:block>

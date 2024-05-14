@@ -3,7 +3,6 @@ package com.ngt.cuoiky.configuration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -17,10 +16,10 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/api/**", "/webjars/**", "/images/**",
-                                "/signup/**", "/verify/**", "/auth/**",
+                        .requestMatchers( "/webjars/**", "/images/**",
+                                "/signup/**", "/auth/**",
                                 "/login/**", "/logout/**", "/assets/**", "/css/**", "/product/**", "/brand/**", "/",
-                                "/js/**", "/search/**", "/forgot-password/**")
+                                "/js/**")
                         .permitAll()
                         .anyRequest().authenticated())
                 .formLogin((form) -> form
@@ -28,17 +27,13 @@ public class SecurityConfig {
                         .usernameParameter("email")
                         .passwordParameter("password")
                         .defaultSuccessUrl("/")
+                        .failureUrl("/login?error=true")
                         .permitAll())
                 .logout((logout) -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                         .logoutSuccessUrl("/login")
                         .deleteCookies("JSESSIONID")
                         .permitAll());
-                // .rememberMe((remember) -> remember
-                //         .rememberMeParameter("remember-me")
-                //         .key("AbcDefgKLDSLmvop_0123456789")
-                //         .tokenValiditySeconds(7 * 24 * 60 * 60)); // 7 days
-
         return http.build();
     }
 
