@@ -54,7 +54,7 @@ public class SecurityConfig {
                 .logoutSuccessUrl("/login")
                 .deleteCookies("JSESSIONID")
                 .permitAll())
-        .authenticationProvider(authenticationProvider()); // Thêm dòng này;
+        .authenticationProvider(authenticationProvider()); 
         return http.build();
     }
 
