@@ -53,8 +53,6 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category categories;
 
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-    private Collection<Review> reviews;
 
     @OneToMany(mappedBy = "products", fetch = FetchType.LAZY)
     private Collection<Cart> carts;
@@ -157,14 +155,6 @@ public class Product {
 
     public void setCategories(Category categories) {
         this.categories = categories;
-    }
-
-    public Collection<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(Collection<Review> reviews) {
-        this.reviews = reviews;
     }
 
     public Collection<Cart> getCarts() {

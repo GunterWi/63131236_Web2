@@ -38,7 +38,7 @@
 
 		<dependency>
     		<groupId>org.thymeleaf.extras</groupId>
-    		<artifactId>thymeleaf-extras-springsecurity5</artifactId>
+    		<artifactId>thymeleaf-extras-springsecurity6</artifactId>
     		<version>3.1.2.RELEASE</version>
 		</dependency>
 
@@ -52,8 +52,9 @@
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>bootstrap</artifactId>
-            <version>5.3.3</version>
+            <version>4.6.1</version>
         </dependency>
+
 
 		<!-- Define fontawesome dependency -->
         <dependency>

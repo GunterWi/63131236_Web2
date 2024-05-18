@@ -77,6 +77,9 @@ public class UserPrincipal implements UserDetails{
     public int hashCode() {
         return Objects.hash(user.getId());
     }
+    public String getFullName() {
+        return this.user.getFirstName() + " " + this.user.getLastName();
+    }
 
     
 }

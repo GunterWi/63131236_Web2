@@ -58,8 +58,6 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private Collection<Order> orders;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private Collection<Review> reviews;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private Collection<Cart> carts;
@@ -157,13 +155,6 @@ public class User {
         this.orders = orders;
     }
 
-    public Collection<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(Collection<Review> reviews) {
-        this.reviews = reviews;
-    }
 
     public Collection<Cart> getCarts() {
         return carts;
