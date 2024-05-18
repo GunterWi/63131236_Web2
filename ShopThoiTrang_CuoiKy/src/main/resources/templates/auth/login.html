@@ -58,7 +58,7 @@
 	<script th:inline="javascript" type="text/javascript" >
 		$(document).ready(function(){
 			let toastModal = document.getElementById('toast')
-			let message =  'defaultMessage';
+			let message =  [[${message}]];
 			if (message) {
 				let toast = new bootstrap.Toast(toastModal)
 				$("#toast-body").text(message)
