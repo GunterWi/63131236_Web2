@@ -9,10 +9,13 @@ import com.ngt.cuoiky.model.Category;
 
 public interface CategoryRepository extends JpaRepository<Category, Integer> {
 
-    @Query("Select c from Category c WHERE c.name = :name")
-    public Category getCategoryByName(String name);
-
-    @Query("SELECT p FROM Category p WHERE p.name LIKE %:keyword% "
+   @Query("SELECT p FROM Category p WHERE p.name LIKE %:keyword% "
             + "OR p.description LIKE %:keyword% ")
     public Page<Category> findAll(String keyword, Pageable pageable);
+
+    @Query("SELECT COUNT(p.id) from Category p WHERE p.id = :id")
+    public Long countById(Integer id);
+
+    @Query("Select c from Category c WHERE c.name = :name")
+    public Category getCategoryByName(String name);
 }

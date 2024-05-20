@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org">
-<head th:replace="fragments :: page_head('Verify - iMusic Website', 'none')" />
+<head th:replace="~{fragments :: page_head('Verify - iMusic Website', 'none')}" />
 <head>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}"/>
 </head>
@@ -19,7 +19,7 @@
 
 			<p class="mt-3 text-center">Bạn đã có tài khoản? <span><a style="color: #20DF7F;text-decoration: none" href="/login">Login</a></span></p>
 		</form>
-		<div th:replace="fragments :: toast"></div>
+		<div th:replace="~{fragments :: toast}"></div>
 		<div class="auth-footer">
 			<img class="auth-footer-img" src="https://res.cloudinary.com/dmriwkfll/image/upload/v1636682353/Vectors_fbzj2w.png">
 		</div>

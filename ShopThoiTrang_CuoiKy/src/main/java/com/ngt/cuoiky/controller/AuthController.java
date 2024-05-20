@@ -15,7 +15,6 @@ import com.ngt.cuoiky.model.User;
 import com.ngt.cuoiky.service.RoleService;
 import com.ngt.cuoiky.service.UserService;
 
-import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
@@ -42,7 +41,7 @@ public class AuthController {
     }
     @PostMapping("/signup")
     public String saveUser(User user, BindingResult errors, RedirectAttributes redirectAttributes, HttpServletRequest request)
-            throws UnsupportedEncodingException, MessagingException {
+            throws UnsupportedEncodingException {
         if (user.getLastName().matches(".*\\d+.*")) {
             errors.rejectValue("lastName", "user", "Họ không được chứa số!");
         }
