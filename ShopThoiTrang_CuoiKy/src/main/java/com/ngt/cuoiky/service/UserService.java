@@ -1,11 +1,13 @@
 package com.ngt.cuoiky.service;
 
 import java.util.Date;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.ngt.cuoiky.exceptions.UserNotFoundException;
 import com.ngt.cuoiky.model.User;
 import com.ngt.cuoiky.repository.UserRepository;
 
@@ -18,6 +20,17 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
     
+    public User getUserByID(int id) throws UserNotFoundException {
+        try {
+            User user = userRepository.findById(id).get();
+            return user;
+
+        }
+        catch(NoSuchElementException ex) {
+            throw new UserNotFoundException("Could not find any user with ID " + id);
+
+        }
+    }
     public User getUserByEmail(String email) {
         User user = userRepository.getUserByEmail(email);
         return user;
