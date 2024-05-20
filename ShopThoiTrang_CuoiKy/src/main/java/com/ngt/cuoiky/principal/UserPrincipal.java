@@ -72,11 +72,15 @@ public class UserPrincipal implements UserDetails{
     }
 
 
-
     @Override
     public int hashCode() {
         return Objects.hash(user.getId());
     }
+
+    public String getFirstName() {return this.user.getFirstName();}
+
+    public String getLastName() {return this.user.getLastName();}
+
     public String getFullName() {
         return this.user.getFirstName() + " " + this.user.getLastName();
     }

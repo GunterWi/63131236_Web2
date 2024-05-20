@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="fragments :: page_head('Home - Shopwise Website', 'none')" />
+<head th:replace="~{fragments :: page_head('Home - Shopwise Website', 'none')}" />
 <head>
     <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/navbar.css}"/>
@@ -9,7 +9,7 @@
 
 </head>
 <body>
-    <div th:replace="fragments/navbar_fragment :: navbar"></div>
+    <div th:replace="~{fragments/navbar_fragment :: navbar}"></div>
     <div class="main-content">
         <div class="profile-main">
             <div class="profile-header d-flex align-items-center">
@@ -86,7 +86,7 @@
             </div>
         </div>
     </div>
-    <div th:replace="fragments/footer_fragment :: footer"></div>
+    <div th:replace="~{fragments/footer_fragment :: footer}"></div>
 <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}" ></script>
 <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.4/dist/sweetalert2.all.min.js"></script>

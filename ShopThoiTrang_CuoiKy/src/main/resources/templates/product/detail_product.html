@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-<head th:replace="fragments :: page_head('Home - Shopwise Website', 'none')" />
+<head th:replace="~{fragments :: page_head('Home - Shopwise Website', 'none')}" />
 <head>
     <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/navbar.css}"/>
@@ -11,7 +11,7 @@
 
 </head>
 <body>
-<div th:replace="fragments/navbar_fragment :: navbar"></div>
+<div th:replace="~{fragments/navbar_fragment :: navbar}"></div>
 <div class="main-content">
     <div class="detail-wrapper d-flex justify-content-center">
         <div class="detail-zoom d-flex justify-content-center align-items-center position-relative">
@@ -24,12 +24,12 @@
             <div class="d-flex align-items-center">
                 <th:block th:if="${product.discount > 0}">
                     <div class="d-flex align-items-center" style="font-size: 16px; text-decoration: line-through; margin-right: 5px; color: #babbc1;">
-                        <div th:replace="fragments :: format_currency(${product.price})"></div>
+                        <div th:replace="~{fragments :: format_currency(${product.price})}"></div>
                         <span>₫</span>
                     </div>
                 </th:block>
                 <div class="detail-summary-price d-flex align-items-center">
-                    <div th:replace="fragments :: format_currency(${product.getDiscountPrice()})"></div>
+                    <div th:replace="~{fragments :: format_currency(${product.getDiscountPrice()})}"></div>
                     <span>₫</span>
                 </div>
             </div>
@@ -197,7 +197,7 @@
     </div>
 
 </div>
-<div th:replace="fragments/footer_fragment :: footer"></div>
+<div th:replace="~{fragments/footer_fragment :: footer}"></div>
 
 <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}" ></script>
 <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
