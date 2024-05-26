@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.ngt.cuoiky.exceptions.CategoryNotFoundException;
 import com.ngt.cuoiky.model.Category;
 import com.ngt.cuoiky.service.CategoryService;
 import com.ngt.cuoiky.service.StorageService;
@@ -36,21 +35,11 @@ public class CategoryController {
 
     @GetMapping("/admin/category/page/{pageNum}")
     public String listByPage(@PathVariable(name = "pageNum") Integer pageNum, Model model,
-    @RequestParam(defaultValue = "") String keyword,
-    @RequestParam(defaultValue = "id") String sortField,
-    @RequestParam(required = false) String sortDir) {
-
-        model.addAttribute("sortField", sortField);
-
-        if(sortDir == null) sortDir = "asc";
-        String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
-        model.addAttribute("sortDir", sortDir);
-        model.addAttribute("reverseSortDir", reverseSortDir);
+    @RequestParam(defaultValue = "") String keyword) 
+    {
 
         model.addAttribute("keyword", keyword);
-
-
-        Page<Category> page = categoryService.listByPage(pageNum, keyword, sortField, sortDir);
+        Page<Category> page = categoryService.listByPage(pageNum, keyword);
         List<Category> listCategories = page.getContent();
         long startCount = (pageNum - 1) * categoryService.CATEGORY_PER_PAGE + 1;
         long endCount = startCount +  categoryService.CATEGORY_PER_PAGE - 1;
@@ -118,13 +107,81 @@ public class CategoryController {
         }
     }
     
+    @GetMapping("/admin/category/edit/{id}")
+    public String editCategory(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes, Model model) {
+        try {
+            Category category = categoryService.getCategoryById(id);
+
+            model.addAttribute("category", category);
+            return "category/new_category";
+        }
+        catch (Exception e) {
+            redirectAttributes.addFlashAttribute("messageError", e.getMessage());
+            return "redirect:/admin/category";
+
+        }
+    }
+
+    @PostMapping("/admin/category/edit/{id}")
+    public String saveEditCategory(Category category, BindingResult errors, RedirectAttributes redirectAttributes,
+                                @PathVariable("id") Integer id, @RequestParam("file") MultipartFile file) {
+
+        try {
+            Category existCategory = categoryService.getCategoryById(id);
+
+            Category categoryCheckUnique = categoryService.getCategoryByName(category.getName());
+
+            if(category.getName().trim().length() == 0) {
+                errors.rejectValue("name", "category", "Vui lòng nhập tên thể loại!");
+            }
+            else if(category.getName().length() > 100) {
+                errors.rejectValue("name", "category", "Tên thể loại không được dài quá 100 ký tự!");
+            }
+
+            if(categoryCheckUnique != null && !categoryCheckUnique.getId().equals(existCategory.getId())) {
+                errors.rejectValue("name", "category", "Tên thể loại này đã có!");
+            }
+
+
+            if(category.getDescription().trim().length() == 0) {
+                errors.rejectValue("description", "category", "Vui lòng nhập mô tả thể loại!");
+            }
+            else if(category.getDescription().length() > 200) {
+                errors.rejectValue("description", "category", "Mô tả không được dài quá 200 ký tự!");
+            }
+
+            if(category.getImage().trim().length() == 0) {
+                errors.rejectValue("image", "category", "Vui lòng nhập hinh anh thể loại!");
+            }
+            if (errors.hasErrors()) {
+                return "category/new_category";
+            } else {
+                if(!existCategory.getImage().equals(category.getImage())) {
+                    String url = storageService.upload(file);
+                    category.setImage(url);
+                }
+
+
+                categoryService.saveCategory(category);
+
+                redirectAttributes.addFlashAttribute("messageSuccess", "The category has been edited successfully.");
+                return "redirect:/admin/category";
+
+
+            }
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("messageError", e.getMessage());
+            return "redirect:/admin/category";
+        }
+    }
+
     @GetMapping("/admin/category/delete/{id}")
     public String deleteCategory(@PathVariable(name = "id") Integer id, RedirectAttributes redirectAttributes) {
         try {
             categoryService.deleteCategory(id);
             redirectAttributes.addFlashAttribute("messageSuccess", "The category ID " + id + " has been deleted successfully");
         }
-        catch (CategoryNotFoundException ex) {
+        catch (Exception ex) {
             redirectAttributes.addFlashAttribute("messageError", ex.getMessage());
         }
         return "redirect:/admin/category/page/1";

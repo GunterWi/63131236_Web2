@@ -6,36 +6,23 @@ import jakarta.persistence.*;
 @Table(name = "districts")
 public class District {
     @Id
-    @Column(name="code", length = 20, nullable = false)
-    private String code;
-
-    @Column(name="name", nullable = false, length = 255)
-    private String name;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "code")
+    private Integer code;
 
     @Column(name="full_name", length = 255)
     private String fullName;
-
-    @Column(name="code_name", length = 255)
-    private String codeName;
 
     @ManyToOne
     @JoinColumn(name="province_code")
     private Province province;
 
-    public String getCode() {
+    public Integer getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(Integer code) {
         this.code = code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getFullName() {
@@ -46,14 +33,6 @@ public class District {
         this.fullName = fullName;
     }
 
-    public String getCodeName() {
-        return codeName;
-    }
-
-    public void setCodeName(String codeName) {
-        this.codeName = codeName;
-    }
-
     public Province getProvince() {
         return province;
     }
@@ -62,5 +41,6 @@ public class District {
         this.province = province;
     }
 
+    
     
 }

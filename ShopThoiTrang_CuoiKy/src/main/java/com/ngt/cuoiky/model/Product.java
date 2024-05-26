@@ -64,7 +64,7 @@ public class Product {
     @Transient
     public Double getDiscountPrice() {
         if (this.getDiscount() > 0) {
-            System.out.println(this.getPrice() * this.getDiscount());
+            // System.out.println(this.getPrice() * this.getDiscount());
             return this.getPrice() - ((this.getPrice() * this.getDiscount()) / 100);
 
         }

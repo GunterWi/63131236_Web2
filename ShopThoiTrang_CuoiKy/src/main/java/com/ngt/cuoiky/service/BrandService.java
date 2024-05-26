@@ -6,7 +6,6 @@ import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ngt.cuoiky.exceptions.BrandNotFoundException;
 import com.ngt.cuoiky.model.Brand;
 import com.ngt.cuoiky.repository.BrandRepository;
 
@@ -24,14 +23,14 @@ public class BrandService {
         return brand;
     }
 
-    public Brand getBrandById(Integer id) throws BrandNotFoundException {
+    public Brand getBrandById(Integer id) {
         try {
             Brand brand = brandRepository.findById(id).get();
             return brand;
 
         } catch (NoSuchElementException ex) {
-            throw new BrandNotFoundException("Could not find any brand with ID " + id);
-
+            System.err.println("Could not find any brand with ID " + id);
+            throw ex;
         }
     }
 }

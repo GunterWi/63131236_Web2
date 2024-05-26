@@ -11,7 +11,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.ngt.cuoiky.exceptions.ProductNotFoundException;
 import com.ngt.cuoiky.model.Product;
 import com.ngt.cuoiky.repository.ProductRepository;
 
@@ -30,15 +29,28 @@ public class ProductService {
         return product;
     }
 
-    public Product getProductById(Integer id) throws ProductNotFoundException {
+    public Product getProductById(Integer id){
         try {
             Product product = productRepository.findById(id).get();
             return product;
 
         } catch (NoSuchElementException ex) {
-            throw new ProductNotFoundException("Could not find any product with ID " + id);
-
+            System.err.println("Could not find any product with ID " + id);
+            throw ex;
         }
+    }
+    public Product saveProduct(Product product) {
+        return productRepository.save(product);
+    }
+
+    public void deleteProduct(Integer id) {
+        Long count = productRepository.countById(id);
+        if (count == null || count == 0) {
+            System.err.println("Could not find any product with ID " + id);
+            throw new NoSuchElementException("Could not find any product with ID " + id);
+        }
+
+        productRepository.deleteById(id);
     }
 
     public Page<Product> listLatestProduct() {
@@ -51,17 +63,10 @@ public class ProductService {
         return productRepository.findBestSellProduct(pageable);
     }
     // admin
-    public Page<Product> listByPage(Integer pageNum, String keyword, String sortField, String sortDir) {
+    public Page<Product> listByPage(Integer pageNum, String keyword) {
         Pageable pageable = null;
-        // if sortField has used
-        if(sortField != null && !sortField.isEmpty()) {
-            Sort sort = Sort.by(sortField);
-            sort = sortDir.equals("asc") ? sort.ascending() : sort.descending();
-            pageable = PageRequest.of(pageNum - 1, PRODUCT_PER_PAGE, sort);
-        }
-        else {
-            pageable = PageRequest.of(pageNum - 1, PRODUCT_PER_PAGE);
-        }
+
+        pageable = PageRequest.of(pageNum - 1, PRODUCT_PER_PAGE);
 
         if (keyword != null && !keyword.isEmpty()) {
             return productRepository.findAll(keyword, pageable);

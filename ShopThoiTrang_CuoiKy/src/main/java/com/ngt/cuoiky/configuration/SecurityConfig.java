@@ -32,10 +32,10 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .csrf().disable()
+            .csrf(csrf -> csrf.disable()) // Thay thế cho csrf().disable()
             .authorizeHttpRequests((auth) -> auth
                 .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
-                .requestMatchers("/profile/**", "/checkout/**", "/cart/**").hasAnyAuthority("ROLE_USER","ROLE_ADMIN")
+                .requestMatchers("/profile/**", "/checkout/**", "/cart/**").hasAnyAuthority("ROLE_USER")
                 .requestMatchers("/webjars/**", "/images/**",
                     "/signup/**", "/auth/**",
                     "/login/**", "/logout/**", "/assets/**", "/css/**", "/product/**", "/brand/**", "/",

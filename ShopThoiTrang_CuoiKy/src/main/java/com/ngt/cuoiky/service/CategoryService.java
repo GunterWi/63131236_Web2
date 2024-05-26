@@ -10,7 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.ngt.cuoiky.exceptions.CategoryNotFoundException;
 import com.ngt.cuoiky.model.Category;
 import com.ngt.cuoiky.repository.CategoryRepository;
 
@@ -28,45 +27,41 @@ public class CategoryService {
         return category;
     }
 
-    public Category getCategoryById(Integer id) throws CategoryNotFoundException {
+    public Category getCategoryById(Integer id) {
         try {
             Category category = categoryRepository.findById(id).get();
             return category;
 
         } catch (NoSuchElementException ex) {
-            throw new CategoryNotFoundException("Could not find any category with ID " + id);
-
+            System.err.println("Could not find any category with ID " + id);
+            throw ex;
         }
     }
 
     public List<Category> findAllCategory() {
         return categoryRepository.findAll();
     }
-     public Page<Category> listByPage(Integer pageNum, String keyword, String sortField, String sortDir) {
+
+    public Page<Category> listByPage(Integer pageNum, String keyword) {
         Pageable pageable = null;
 
-        if(sortField != null && !sortField.isEmpty()) {
-            Sort sort = Sort.by(sortField);
-            sort = sortDir.equals("asc") ? sort.ascending() : sort.descending();
-            pageable = PageRequest.of(pageNum - 1, CATEGORY_PER_PAGE, sort);
-        }
-        else {
-            pageable = PageRequest.of(pageNum - 1, CATEGORY_PER_PAGE);
-        }
+        pageable = PageRequest.of(pageNum - 1, CATEGORY_PER_PAGE);
 
         if (keyword != null && !keyword.isEmpty()) {
             return categoryRepository.findAll(keyword, pageable);
         }
         return categoryRepository.findAll(pageable);
     }
+
     public Category saveCategory(Category category) {
         return categoryRepository.save(category);
     }
 
-    public void deleteCategory(Integer id) throws CategoryNotFoundException {
+    public void deleteCategory(Integer id) {
         Long count = categoryRepository.countById(id);
         if (count == null || count == 0) {
-            throw new CategoryNotFoundException("Could not find any category with ID " + id);
+            System.out.println("Could not find any category with ID " + id); 
+            throw new NoSuchElementException("Could not find any category with ID " + id);
         }
 
         categoryRepository.deleteById(id);

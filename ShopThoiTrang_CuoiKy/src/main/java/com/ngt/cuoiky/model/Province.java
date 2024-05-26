@@ -6,32 +6,27 @@ import jakarta.persistence.*;
 @Table(name = "provinces")
 public class Province {
     @Id
-    @Column(name="code", length = 20, nullable = false)
-    private String code;
-
-    @Column(name="name", nullable = false, length = 255)
-    private String name;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "code")
+    private Integer code;
 
     @Column(name="full_name", length = 255)
     private String fullName;
-
-    @Column(name="code_name", length = 255)
-    private String codeName;
-
-    public String getCode() {
-        return code;
-    }
-
-    public String getName() {
-        return name;
-    }
 
     public String getFullName() {
         return fullName;
     }
 
-    public String getCodeName() {
-        return codeName;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
-    
+
+    public Integer getCode() {
+        return code;
+    }
+
+    public void setCode(Integer code) {
+        this.code = code;
+    }
+
 }

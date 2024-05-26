@@ -19,12 +19,9 @@ public class AdminController {
     
     @GetMapping("/admin")
     public String adminDashboard(Model model) throws ParseException {
-      
-
         long countUserByWeek = reportService.countUserByWeek();
         long countOrderByWeek = reportService.countOrderByWeek();
         long totalOrderByWeek = reportService.getTotalOrderByWeek();
-
 
         model.addAttribute("countUserByWeek", countUserByWeek);
         model.addAttribute("countOrderByWeek", countOrderByWeek);

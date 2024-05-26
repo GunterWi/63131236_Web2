@@ -15,6 +15,9 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             + "OR p.shortDescription LIKE %?1%")
     public Page<Product> findAll(String keyword, Pageable pageable);
 
+    @Query("SELECT COUNT(p.id) from Product p WHERE p.id = :id")
+    public Long countById(Integer id);
+
     @Query("SELECT p FROM Product  p WHERE p.isActive <> FALSE ORDER BY p.registrationDate DESC")
     public Page<Product> findLatestProduct(Pageable pageable);
 

@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.ngt.cuoiky.exceptions.UserNotFoundException;
 import com.ngt.cuoiky.model.Cart;
 import com.ngt.cuoiky.model.User;
 import com.ngt.cuoiky.principal.UserPrincipal;
@@ -52,7 +51,7 @@ public class ProfileController {
             model.addAttribute("user", user);
             return "profile-user/profile";
         }
-        catch (UserNotFoundException e) {
+        catch (Exception e) {
             redirectAttributes.addFlashAttribute("messageError", e.getMessage());
             return "profile-user/profile";
         }
