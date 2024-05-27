@@ -1,6 +1,5 @@
 package com.nqt.ListObjectPagination.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -20,13 +19,13 @@ import org.springframework.ui.Model;
 
 @Controller
 public class SinhVienController {
-	 @Autowired
-	 private SinhvienService svService;
+	@Autowired
+	private SinhvienService svService;
 	 
 	@GetMapping("/danhsachSV")
 	public String listStudent(Model model,  
-								@RequestParam("page") Optional<Integer> page,
-								@RequestParam("size") Optional<Integer> size) {
+								@RequestParam("size") Optional<Integer> size,
+								@RequestParam("page") Optional<Integer> page) {
 		final int currentPage = page.orElse(1);
         final int pageSize = size.orElse(5);
         Page<SinhVien> svPage = svService.findPaginated(PageRequest.of(currentPage - 1, pageSize));

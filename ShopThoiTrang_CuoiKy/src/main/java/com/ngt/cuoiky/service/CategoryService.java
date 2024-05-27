@@ -60,7 +60,7 @@ public class CategoryService {
     public void deleteCategory(Integer id) {
         Long count = categoryRepository.countById(id);
         if (count == null || count == 0) {
-            System.out.println("Could not find any category with ID " + id); 
+            System.err.println("Could not find any category with ID " + id); 
             throw new NoSuchElementException("Could not find any category with ID " + id);
         }
 

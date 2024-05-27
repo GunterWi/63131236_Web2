@@ -1,3 +1,5 @@
 {
-  "java.dependency.syncWithFolderExplorer": true
+  "java.dependency.syncWithFolderExplorer": true,
+  "java.project.sourcePaths": ["tutorial"],
+  "java.compile.nullAnalysis.mode": "disabled"
 }

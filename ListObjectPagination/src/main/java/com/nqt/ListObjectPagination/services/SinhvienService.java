@@ -11,6 +11,4 @@ import org.springframework.data.domain.Pageable;
 @Service
 public interface SinhvienService {
 	public Page<SinhVien> findPaginated(Pageable pageable);
-     
-   
 }
