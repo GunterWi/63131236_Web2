@@ -54,12 +54,12 @@
                                     <thead>
                                         <tr>
                                             <th class="d-none d-sm-table-cell text-center">Id</th>
-                                            <th class="d-none d-sm-table-cell text-center">FirstName</th>
-                                            <th class="d-none d-sm-table-cell text-center">RegistrationDate</th>
+                                            <th class="d-none d-sm-table-cell text-center">Tên</th>
+                                            <th class="d-none d-sm-table-cell text-center">Ngày tạo</th>
                                             <th class="d-none d-sm-table-cell text-center">Email</th>
-                                            <th class="d-none d-sm-table-cell text-center">Phone</th>
-                                            <th>Status</th>
-                                            <th class="text-center">Action</th>
+                                            <th class="d-none d-sm-table-cell text-center">SĐT</th>
+                                            <th>Trạng thái</th>
+                                            <th class="text-center">Hành động</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -82,8 +82,8 @@
                                                 <div th:text="${user.phone}"></div>
                                             </td>
                                             <td>
-                                                <span th:if="${user.isActive == true}" class="badge bg-success">Available</span>
-                                                <span th:if="${user.isActive == false}"  class="badge bg-danger">Banned</span>
+                                                <span th:if="${user.isActive == true}" class="badge bg-success">Đang hoạt động</span>
+                                                <span th:if="${user.isActive == false}"  class="badge bg-danger">Bị cấm</span>
                                             </td>
                                             <td class="text-center fs-sm">
                                                 <a class="btn btn-sm btn-alt-secondary" th:href="@{'/admin/user/edit/' + ${user.id}}"  data-toggle="tooltip" data-placement="top" title="Edit">
@@ -102,7 +102,7 @@
                                     </div>
                                     <a href="/admin/user/add">
                                         <button class="btn btn-primary d-flex align-items-center">
-                                            <span>Create Now</span>
+                                            <span>Tạo tài khoản</span>
                                         </button>
                                     </a>
                                 </div>

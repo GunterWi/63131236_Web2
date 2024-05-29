@@ -28,7 +28,7 @@ public class CategoryController {
     @Autowired
     private StorageService storageService;
 
-     @GetMapping("/admin/category")
+    @GetMapping("/admin/category")
     public String listFirstPage() {
         return "redirect:/admin/category/page/1";
     }

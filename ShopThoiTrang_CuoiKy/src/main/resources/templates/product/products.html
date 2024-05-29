@@ -34,15 +34,14 @@
                                 <table class="table table-borderless table-striped table-vcenter">
                                     <thead>
                                         <tr>
-                                            <!-- fragments column_link(fieldName, columnLabel, entityName) button search down and up-->
                                             <th class="d-none d-sm-table-cell text-center">Id</th>
-                                            <th class="d-none d-sm-table-cell text-center">Name</th>
-                                            <th class="d-none d-sm-table-cell text-center">RegistrationDate</th>
-                                            <th class="d-none d-sm-table-cell text-center">Quantity</th>
-                                            <th class="d-none d-sm-table-cell text-center">Sold Quantity</th>
-                                            <th class="d-none d-sm-table-cell text-end">Price</th>
-                                            <th>Status</th>
-                                            <th class="text-center" style="width: 100px">Action</th>
+                                            <th class="d-none d-sm-table-cell text-center">Tên</th>
+                                            <th class="d-none d-sm-table-cell text-center">Ngày tạo</th>
+                                            <th class="d-none d-sm-table-cell text-center">Số lượng</th>
+                                            <th class="d-none d-sm-table-cell text-center">Số lượng đã bán</th>
+                                            <th class="d-none d-sm-table-cell text-end">Giá</th>
+                                            <th>Trạng thái</th>
+                                            <th class="text-center" style="width: 100px">Hành động</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -68,9 +67,9 @@
                                                 <div th:replace="~{fragments :: format_currency(${product.price})}"><strong>₫</strong></div>
                                             </td>
                                             <td>
-                                                <span th:if="${product.isActive == true && product.inStock != 0}" class="badge bg-success">Available</span>
-                                                <span th:if="${product.isActive == false}"  class="badge bg-danger">Banned</span>
-                                                <span th:if="${product.inStock == 0 && product.isActive == true}" class="badge bg-warning">Out of Stock</span>
+                                                <span th:if="${product.isActive == true && product.inStock != 0}" class="badge bg-success">Đang hiển thị</span>
+                                                <span th:if="${product.isActive == false}"  class="badge bg-danger">Bị cấm</span>
+                                                <span th:if="${product.inStock == 0 && product.isActive == true}" class="badge bg-warning">Hết hàng</span>
                                             </td>
                                             <td class="text-center fs-sm" style="width: 100px">
                                                 <a class="btn btn-sm btn-alt-secondary" th:href="@{'/admin/product/edit/' + ${product.id}}"  data-toggle="tooltip" data-placement="top" title="Edit">
