@@ -76,10 +76,10 @@
                                     </td>
                                     <td class="text-center fs-sm">
                                         <th:block th:unless="${order.status.id == 4 || order.status.id == 5}">
-                                            <a class="btn btn-sm btn-outline-success" th:href="@{'/admin/order/accept?id=' + ${order.id} + '&statusId=' + ${order.status.id}}"  data-toggle="tooltip" data-placement="top" title="Accept">
+                                            <a class="btn btn-sm btn-outline-success" th:href="@{#}"  data-toggle="tooltip" data-placement="top" title="Accept">
                                                 <i class="fas fa-check-circle"></i>
                                             </a>
-                                            <a class="btn btn-sm btn-outline-danger" th:href="@{'/admin/order/deny?id=' + ${order.id} + '&statusId=' + ${order.status.id}}"  data-toggle="tooltip" data-placement="top" title="Deny">
+                                            <a class="btn btn-sm btn-outline-danger" th:href="@{#}"  data-toggle="tooltip" data-placement="top" title="Deny">
                                                 <i class="fas fa-times-circle"></i>
                                             </a>
                                         </th:block>
@@ -97,7 +97,7 @@
                         </div>
                     </div>
                 </section>
-                <div th:replace="fragments :: pagination('order')"></div>
+                <div th:replace="~{fragments :: pagination('order')}"></div>
             </div>
         </div>
     </div>
@@ -141,36 +141,6 @@
     })
 </script>
 
-<script type="text/javascript">
-    $(function () {
-
-        $("#start-date").datepicker({
-            autoclose: true,
-            todayHighlight: true,
-            endDate: '+0d',
-            format: 'dd-mm-yyyy',
-            orientation: 'top left'
-        }).on('changeDate', function(selected){
-            let minDate = new Date(selected.date.valueOf());
-            $('#end-date').datepicker('setStartDate', minDate);
-        });
-
-
-
-
-        $("#end-date").datepicker({
-            autoclose: true,
-            todayHighlight: true,
-            endDate: '+0d',
-            format: 'dd-mm-yyyy',
-            orientation: 'top left'
-        }).on('changeDate', function(selected){
-            let minDate = new Date(selected.date.valueOf());
-            $('#start-date').datepicker('setEndDate', minDate);
-        });
-
-    });
-</script>
 </body>
 
 

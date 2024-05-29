@@ -157,11 +157,11 @@ public class BrandController {
             if (errors.hasErrors()) {
                 return "brand/new_brand";
             } else {
+                // if brand logo is changed
                 if(!existBrand.getLogo().equals(brand.getLogo())) {
                     String url = storageService.upload(file);
                     brand.setLogo(url);
                 }
-
 
                 brandService.saveBrand(brand);
 
