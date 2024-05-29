@@ -8,7 +8,7 @@
                 <span>Hi,</span>
                 <span class="header-name" style="text-transform: capitalize" th:text="${#authentication.getPrincipal().getFirstName()}">Dom</span>
                 <span style="padding-bottom: 10px">
-                    <img alt="avatar" src="https://res.cloudinary.com/dmriwkfll/image/upload/v1650937333/user_tz4efy.png" class="avatar"/>
+                    <img alt="avatar" th:src="@{/images/default.png}" class="avatar"/>
                 </span>
             </div>
             <ul class="dropdown-menu dropdown-menu-profile" aria-labelledby="dropdownMenuButton">
