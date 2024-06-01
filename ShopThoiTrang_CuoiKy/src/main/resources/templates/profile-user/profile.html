@@ -14,7 +14,7 @@
         <div class="profile-main">
             <div class="profile-header d-flex align-items-center">
                 <div class="profile-author d-flex align-items-center">
-                    <div class="profile-author-img"><img th:src="@{/images/Vectors.png}"/></div>
+                    <div class="profile-author-img"><img th:src="@{/images/default.png}"/></div>
                     <div class="profile-author-content d-flex flex-column flex-wrap">
                         <div class="profile-author-name" style="text-transform: capitalize" th:text="${user.firstName + ' ' + user.lastName}"></div>
                         <th:block th:if="${user.phone}">
@@ -35,12 +35,12 @@
                         </div>
                         <span>Thông tin tài khoản</span>
                     </a>
-                    <a class="profile-tabs-button d-flex align-items-center" href="/profile/change-password">
+                    <!-- <a class="profile-tabs-button d-flex align-items-center" href="#">
                         <div class="profile-icon-wrapper d-flex align-items-center justify-content-center">
                             <i class="fas fa-lock"></i>
                         </div>
                         <span>Đổi mật khẩu</span>
-                    </a>
+                    </a> -->
                     <a class="profile-tabs-button d-flex align-items-center" href="/profile/order/info">
                         <div class="profile-icon-wrapper d-flex align-items-center justify-content-center">
                             <i class="far fa-clipboard"></i>

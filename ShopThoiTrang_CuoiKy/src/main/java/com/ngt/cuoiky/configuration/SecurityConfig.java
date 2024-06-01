@@ -37,9 +37,8 @@ public class SecurityConfig {
                 .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
                 .requestMatchers("/profile/**", "/checkout/**", "/cart/**").hasAnyAuthority("ROLE_USER","ROLE_ADMIN")
                 .requestMatchers("/webjars/**", "/images/**",
-                    "/signup/**", "/auth/**",
-                    "/login/**", "/logout/**", "/assets/**", "/css/**", "/product/**", "/brand/**", "/",
-                    "/js/**")
+                    "/signup/**", "/assets/**", "/css/**", "/product/**", "/brand/**",
+                    "/", "/js/**")
                 .permitAll()
                 .anyRequest().authenticated())
             .formLogin((form) -> form

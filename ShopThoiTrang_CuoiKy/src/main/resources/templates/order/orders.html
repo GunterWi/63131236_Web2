@@ -66,12 +66,8 @@
                                     <td class="d-none d-md-table-cell fs-sm">
                                         <strong>[[${order.user.getFullName()}]]</strong>
                                     </td>
-                                    <td class="d-none d-md-table-cell fs-sm">
-                                        <ul class="no-marker">
-                                            <li th:each="detail : ${order.orderDetails}">
-                                                [[${detail.product.name}]]
-                                            </li>
-                                        </ul>
+                                    <td class="d-none d-md-table-cell fs-sm no-marker" th:utext="${order.getProductNames()}">
+                                        
                                     </td>
                                     <td class="d-none d-sm-table-cell text-center fs-sm">
                                         <div  th:replace="~{fragments :: format_time(${order.date})}"></div>

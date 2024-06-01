@@ -95,5 +95,19 @@ public class Order {
     public void setAddress(Address address) {
         this.address = address;
     }
+
+    public String getProductNames() {
+        String productNames = "";
+
+        productNames = "<ul>";
+
+        for (OrderDetail detail : orderDetails) {
+            productNames += "<li>" + detail.getProduct().getName() + " x " + detail.getQuantity() + "</li>";
+        }
+
+        productNames += "</ul>";
+
+        return productNames;
+    }
     
 }
