@@ -1,6 +1,7 @@
 package com.ngt.cuoiky.service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +31,29 @@ public class PosterService {
 
     public List<Poster> listPosterLeftUser() {
         return posterRepository.listPosterLeftUser();
+    }
+    public Poster savePoster(Poster poster) {
+        return posterRepository.save(poster);
+    }
+
+    public void deletePoster(Integer id) throws Exception {
+        Long count = posterRepository.countById(id);
+        if (count == null || count == 0) {
+            throw new Exception("Could not find any product with ID " + id);
+        }
+
+        posterRepository.deleteById(id);
+    }
+
+    public Poster getPosterByIdAndType(Integer id, String type) throws Exception {
+        try {
+            return posterRepository.getPosterByIdAndType(id, type);
+
+        }
+        catch(NoSuchElementException ex) {
+            throw new Exception("Could not find any poster with ID " + id);
+
+        }
     }
 
 }

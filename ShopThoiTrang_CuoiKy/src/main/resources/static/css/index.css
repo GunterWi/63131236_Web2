@@ -82,3 +82,12 @@ body.swal2-shown.swal2-height-auto {
     padding: 0 !important;
     overflow: unset !important;
 }
+
+.no-marker {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.no-marker li::marker {
+    content: '';
+}

@@ -49,6 +49,7 @@
                                 <tr>
                                     <th class="d-none d-sm-table-cell text-center">Id</th>
                                     <th class="d-none d-sm-table-cell text-center">Khách hàng</th>
+                                    <th class="d-none d-sm-table-cell text-center">Sản phẩm</th>
                                     <th class="d-none d-sm-table-cell text-center">Ngày đặt</th>
                                     <th class="d-none d-sm-table-cell text-center">Tổng tiền</th>
                                     <th class="d-none d-sm-table-cell text-center">Trạng thái</th>
@@ -64,6 +65,13 @@
                                     </td>
                                     <td class="d-none d-md-table-cell fs-sm">
                                         <strong>[[${order.user.getFullName()}]]</strong>
+                                    </td>
+                                    <td class="d-none d-md-table-cell fs-sm">
+                                        <ul class="no-marker">
+                                            <li th:each="detail : ${order.orderDetails}">
+                                                [[${detail.product.name}]]
+                                            </li>
+                                        </ul>
                                     </td>
                                     <td class="d-none d-sm-table-cell text-center fs-sm">
                                         <div  th:replace="~{fragments :: format_time(${order.date})}"></div>

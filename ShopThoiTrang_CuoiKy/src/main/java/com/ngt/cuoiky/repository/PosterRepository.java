@@ -20,4 +20,10 @@ public interface PosterRepository extends JpaRepository<Poster, Integer> {
 
     @Query("SELECT p FROM Poster p WHERE p.type = 'left' AND p.isActive <> FALSE")
     public List<Poster> listPosterLeftUser();
+
+    @Query("SELECT COUNT(p.id) from Poster p WHERE p.id = :id")
+    public Long countById(Integer id);
+
+    @Query("SELECT p FROM Poster p WHERE p.type = :type AND p.id = :id")
+    public Poster getPosterByIdAndType(Integer id, String type);
 }

@@ -14,7 +14,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
     public long countOrderByProductAndUser(Integer userId, Integer productId);
 
     @Query("SELECT DISTINCT o FROM Order o JOIN o.orderDetails od JOIN od.product p "
-        + "WHERE p.name LIKE %:keyword% AND "
+        + "WHERE p.name LIKE %:keyword% OR o.user.firstName LIKE %:keyword% OR o.user.lastName LIKE %:keyword% AND "
         + "(( :status = 'ALL' AND o.status IS NOT NULL) OR (:status <> 'ALL' AND o.status.name = :status))")
     public Page<Order> findByKeyword(String keyword, String status, Pageable pageable);
 

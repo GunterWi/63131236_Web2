@@ -79,7 +79,7 @@
                             <!-- Slides -->
                             <th:block  th:each="cate : ${listCategories}">
                                 <div class="swiper-slide category-slide">
-                                    <a th:href="${'/search/page/1?keywordSearch=&radio-category=' + cate.id +  '&radio-brand=all&radio-price=all'}"
+                                    <a th:href="${'#'}"
                                        class="d-flex align-items-center justify-content-center">
                                         <img th:src="${cate.image}"/>
                                         <div class="category-text" style="text-transform: capitalize" th:text="${cate.name}"></div>
@@ -106,7 +106,7 @@
                             <!-- Slides -->
                             <th:block  th:each="brand : ${listBrands}">
                                 <div class="swiper-slide brand-slide">
-                                    <a th:href="${'/search/page/1?keywordSearch=&radio-category=all&radio-brand=' + brand.id + '&radio-price=all'}"
+                                    <a th:href="${'#'}"
                                        class="d-flex justify-content-center align-items-center">
                                         <img th:src="${brand.logo}"/>
                                     </a>
