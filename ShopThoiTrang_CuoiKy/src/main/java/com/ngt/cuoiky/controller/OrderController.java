@@ -51,7 +51,7 @@ public class OrderController {
     public String profileOrderInfo(@AuthenticationPrincipal UserPrincipal loggedUser, Model model,
                                    @PathVariable(name = "pageNum") Integer pageNum,
                                    @RequestParam(name = "keyword", required = false) String keyword,
-                                   @RequestParam(name = "status", required = false) String status,
+                                   @RequestParam(name = "status", required = false) Integer status,
                                    RedirectAttributes redirectAttributes) {
         Integer id = loggedUser.getId();
         try {
@@ -67,7 +67,7 @@ public class OrderController {
             }
 
             if(status == null) {
-                status = "ALL";
+                status = 0; // status all
             }
 
 
@@ -124,6 +124,7 @@ public class OrderController {
         }
     }
 
+
     @GetMapping("/admin/order")
     public String listOrderAdminFirstPage() {
         return "redirect:/admin/order/page/1";
@@ -132,10 +133,10 @@ public class OrderController {
     @GetMapping("/admin/order/page/{pageNum}")
     public String listOrderAdminPage(Model model,
                                      @PathVariable(name = "pageNum") Integer pageNum,
-                                     @RequestParam(name = "keyword", required = false) String keyword,@RequestParam(name = "status", required = false) String status){
+                                     @RequestParam(name = "keyword", required = false) String keyword,@RequestParam(name = "status", required = false) Integer status){
         try {
             if(status == null) {
-                status = "ALL";
+                status = 0; // status all
             }
             
             Page<Order> page = orderService.listByPage(pageNum, keyword, status);
@@ -160,9 +161,35 @@ public class OrderController {
             model.addAttribute("endCount", endCount);
         }
         catch (Exception e) {
-            status = "ALL";
+            status = 0;
         }
         
         return "order/orders";
+    }
+
+    @GetMapping("/admin/order/accept")
+    public String acceptOrder(@RequestParam("id") Integer id, @RequestParam("statusId") Integer statusId) throws Exception {
+
+        orderService.acceptOrder(id, statusId);
+        return "redirect:/admin/order";
+    }
+
+    @GetMapping("/admin/order/deny")
+    public String denyOrder(@RequestParam("id") Integer id, @RequestParam("statusId") Integer statusId) throws Exception {
+
+        orderService.denyOrder(id, statusId);
+        return "redirect:/admin/order";
+    }
+
+    @GetMapping("/profile/order/requestCancel")
+    public String requestCancel(@RequestParam("id") Integer id) throws Exception {
+        orderService.requestCancel(id);
+        return "redirect:/profile/order/info";
+    }
+
+    @GetMapping("/profile/order/cancelRequest")
+    public String cancelRequest(@RequestParam("id") Integer id) throws Exception {
+        orderService.cancelRequest(id);
+        return "redirect:/profile/order/info";
     }
 }

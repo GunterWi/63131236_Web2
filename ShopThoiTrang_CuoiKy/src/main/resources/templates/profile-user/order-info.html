@@ -66,7 +66,7 @@
                                 <div class="profile-order-filter-item d-flex flex-column">
                                     <label class="form-label" for="status">Trạng thái</label>
                                     <select class="custom-select profile-order-input" id="status" name="status">
-                                        <option value="ALL" >Tất cả</option>
+                                        <option value="0" >Tất cả</option>
                                         <option th:each="statusItem : ${orderStatusList}" th:value="${statusItem.id}" th:text="${statusItem.name}"></option>
                                     </select>
                                 </div>
