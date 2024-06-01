@@ -1,6 +1,8 @@
 package com.ngt.cuoiky.service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,9 +13,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.ngt.cuoiky.model.Address;
+import com.ngt.cuoiky.model.Cart;
 import com.ngt.cuoiky.model.Order;
+import com.ngt.cuoiky.model.OrderDetail;
+import com.ngt.cuoiky.model.Product;
 import com.ngt.cuoiky.model.User;
 import com.ngt.cuoiky.repository.OrderRepository;
+import com.ngt.cuoiky.repository.OrderStatusRepository;
 
 @Service
 public class OrderService {
@@ -23,7 +30,10 @@ public class OrderService {
     @Autowired
     private OrderRepository orderRepository;
     
-     public Order getOrder(Integer id, User user) throws Exception {
+    @Autowired
+    private OrderStatusRepository orderStatusRepository;
+
+    public Order getOrder(Integer id, User user) throws Exception {
         try {
             return orderRepository.findByIdAndUser(id, user.getId());
 
@@ -34,7 +44,40 @@ public class OrderService {
 
         }
     }
-    
+
+    public Order createOrder(User user, Address address, List<Cart> cartList) {
+        Order newOrder = new Order();
+        newOrder.setDate(new java.util.Date());
+        newOrder.setAddress(address);
+        newOrder.setUser(user);
+
+        Set<OrderDetail> orderDetailSet = newOrder.getOrderDetails();
+        double totalWithoutDiscount = 0.0;
+        for (Cart cart : cartList) {
+            Product product = cart.getProducts();
+            product.setSoldQuantity(product.getSoldQuantity() + cart.getQuantity());
+            product.setInStock(product.getInStock() - cart.getQuantity());
+            OrderDetail orderDetail = new OrderDetail();
+
+
+            orderDetail.setOrder(newOrder);
+            orderDetail.setProduct(product);
+            orderDetail.setQuantity(cart.getQuantity());
+            orderDetail.setUnitPrice(product.getDiscountPrice()); //price with discount
+            orderDetail.setItemPrice(product.getPrice());
+            orderDetail.setSubTotal(cart.getSubtotal());
+            totalWithoutDiscount += cart.getSubtotal();
+
+            orderDetailSet.add(orderDetail);
+        }
+
+
+        newOrder.setStatus(orderStatusRepository.getOrderStatusById(1));
+        newOrder.setTotalPrice(totalWithoutDiscount);
+
+        return orderRepository.save(newOrder);
+    }
+
     public boolean isUserHasBuyProduct(Integer userId, Integer productId) {
         long num = orderRepository.countOrderByProductAndUser(userId, productId);
         System.out.println("userId: " + userId + ", productId: " + productId + ", num: " + num);

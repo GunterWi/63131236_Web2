@@ -50,4 +50,8 @@ public class CartService {
     public void deleteCartItem(Integer userId, Integer productId) {
         cartRepository.deleteByUserAndProduct(userId, productId);
     }
+    
+    public void deleteCartItemByUser(Integer userId) {
+        cartRepository.deleteByUser(userId);
+    }
 }

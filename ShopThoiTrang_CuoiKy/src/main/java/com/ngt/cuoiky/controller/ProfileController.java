@@ -67,7 +67,89 @@ public class ProfileController {
         }
 
     }
-    
+
+    @GetMapping("/profile/edit")
+    public String profileEdit(@AuthenticationPrincipal UserPrincipal loggedUser, Model model,
+                              RedirectAttributes redirectAttributes) {
+        Integer id = loggedUser.getId();
+        try {
+            List<Cart> listCarts = cartService.findCartByUser(loggedUser.getId());
+
+            double estimatedTotal = 0;
+
+            for (Cart item : listCarts) {
+                estimatedTotal += item.getSubtotal();
+            }
+
+            model.addAttribute("listCarts", listCarts);
+            model.addAttribute("estimatedTotal", estimatedTotal);
+            if (!model.containsAttribute("user")) {
+                User user = userService.getUserByID(id);
+                model.addAttribute("user", user);
+            }
+            return "profile-user/edit-profile";
+        }
+        catch (Exception e) {
+            redirectAttributes.addFlashAttribute("messageError", e.getMessage());
+            return "profile-user/edit-profile";
+        }
+    }
+
+    @PostMapping("/profile/edit")
+    public String editProfile(User user, BindingResult errors, @AuthenticationPrincipal UserPrincipal loggedUser,
+                              RedirectAttributes redirectAttributes) {
+        Integer idLoggedUser = loggedUser.getId();
+        if(!idLoggedUser.equals(user.getId())) {
+            redirectAttributes.addFlashAttribute("messageError", "Loi xac thuc nguoi dung!");
+            return "redirect:/profile/edit";
+        }
+        try {
+            User existUser = userService.getUserByID(user.getId());
+            if (user.getLastName().matches(".*\\d+.*")) {
+                errors.rejectValue("lastName", "user", "Họ không được chứa số!");
+            }
+            if (user.getLastName().matches(".*[:;/{}*<>=()!.#$@_+,?-]+.*")) {
+                errors.rejectValue("lastName", "user", "Họ không được chứa ký tự đặc biệt!");
+            }
+            if (user.getFirstName().matches(".*\\d+.*")) {
+                errors.rejectValue("firstName", "user", "Tên không được chứa số!");
+            }
+            if (user.getFirstName().matches(".*[:;/{}*<>=()!.#$@_+,?-]+.*")) {
+                errors.rejectValue("firstName", "user", "Tên không được chứa ký tự đặc biệt!");
+            }
+            if (user.getLastName().length() > 100) {
+                errors.rejectValue("lastName", "user", "Họ không được dài quá 100 ký tự!");
+            }
+            if (user.getFirstName().length() > 50) {
+                errors.rejectValue("firstName", "user", "Tên không được dài quá 100 ký tự!");
+            }
+            if (!user.getPhone().matches("\\d{10,}")) {
+                errors.rejectValue("phone", "user", "Số điện thoại không hợp lệ!");
+            }
+            if ((userService.getUserByPhone(user.getPhone()) != null) && !user.getPhone().equals(existUser.getPhone())) {
+                errors.rejectValue("phone", "user", "Số điện thoại đã được sử dụng!");
+            }
+            if (errors.hasErrors()) {
+                redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.user", errors);
+                redirectAttributes.addFlashAttribute("user", user);
+                return "redirect:/profile/edit";
+            } else{
+                existUser.setFirstName(user.getFirstName());
+                existUser.setLastName(user.getLastName());
+                existUser.setPhone(user.getPhone());
+                log.info(existUser.toString());
+                userService.saveEditUser(existUser);
+                redirectAttributes.addFlashAttribute("messageSuccess", "Người dùng đã được chỉnh sửa thành công.");
+                return "redirect:/profile/edit";
+            }
+        }
+        catch (Exception e) {
+            redirectAttributes.addFlashAttribute("messageError", e.getMessage());
+            return "redirect:/profile/edit";
+        }
+
+    }
+
     @GetMapping("/profile/address")
     public String getListAddress(@AuthenticationPrincipal UserPrincipal loggedUser, Model model,
                                  RedirectAttributes redirectAttributes) {
